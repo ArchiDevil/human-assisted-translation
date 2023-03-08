@@ -8,15 +8,19 @@ export default {
   },
   emits: ['input'],
   mounted() {
-    const elem = this.$refs.input as HTMLElement
-    elem.style.height = '0'
-    elem.style.height = this.$el.scrollHeight + 'px'
+    this.updateHeight()
+  },
+  updated() {
+    this.updateHeight()
   },
   methods: {
-    input() {
+    updateHeight() {
       const elem = this.$refs.input as HTMLElement
       elem.style.height = '0'
       elem.style.height = this.$el.scrollHeight + 'px'
+    },
+    input() {
+      this.updateHeight()
       this.$emit('input', this.$el.value)
     }
   }

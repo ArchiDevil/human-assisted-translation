@@ -60,7 +60,7 @@ export default {
         const store = useStore()
         store.segments = fileSegments
         store.filename = file.name
-        component.$router.push('/document')
+        component.$router.push('/human-assisted-translation/document')
       }
       reader.readAsText(file)
     }

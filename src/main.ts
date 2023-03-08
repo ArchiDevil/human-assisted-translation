@@ -7,8 +7,8 @@ import FileView from './components/FileView.vue'
 import DocumentView from './components/DocumentView.vue'
 
 const routes = [
-  { path: '/', component: FileView },
-  { path: '/document', component: DocumentView },
+  { path: '/human-assisted-translation/', component: FileView },
+  { path: '/human-assisted-translation/document', component: DocumentView },
 ]
 
 const router = createRouter({
