@@ -23,12 +23,17 @@ export default {
       this.updateHeight()
       this.$emit('input', this.$el.value)
     }
+  },
+  computed: {
+    hasIssues(): boolean {
+      return /\\n/g.test(this.text)
+    }
   }
 }
 </script>
 
 <template>
-  <textarea :value="text" @input="input" spellcheck="false" ref="input" />
+  <textarea :class="{'warning': hasIssues}" :value="text" @input="input" spellcheck="false" ref="input" />
 </template>
 
 <style scoped>
@@ -38,5 +43,9 @@ textarea {
 
 textarea:focus {
   @apply border-b-2 border-sky-600 bg-white;
+}
+
+.warning {
+  @apply bg-amber-200;
 }
 </style>
