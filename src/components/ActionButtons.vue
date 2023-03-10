@@ -1,5 +1,4 @@
 <script lang="ts">
-import { registerRuntimeHelpers } from '@vue/compiler-core'
 import { PropType } from 'vue'
 import { Segment } from '../interfaces'
 import { useStore } from '../stores/store'
@@ -47,6 +46,19 @@ export default {
 
       // update the store
       store.segments = newSegments
+    },
+    deleteSegment() {
+      const store = useStore()
+      const newSegments = store.segments.slice()
+      const index = newSegments.indexOf(this.segment)
+      newSegments.splice(index, 1)
+
+      // recalculate the ids from the beginning
+      let id = 1
+      for (const segment of newSegments) {
+        segment.id = id++
+      }
+      store.segments = newSegments
     }
   }
 }
@@ -54,8 +66,9 @@ export default {
 
 <template>
   <div class="flex flex-col my-3">
-    <button @click="remove">Remove</button>
-    <button @click="split">Split</button>
+    <button @click="remove">Remove \n</button>
+    <button @click="split">Split by \n</button>
+    <button @click="deleteSegment">Delete seg</button>
   </div>
 </template>
 
