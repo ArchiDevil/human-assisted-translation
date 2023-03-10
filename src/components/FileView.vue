@@ -52,10 +52,16 @@ export default {
         let i = 1
         for (let segment of fileSegments) {
           segment.id = i++
-          segment.original = segment.original.replace(/(\n|\r\n)/g, '\\n').replace(/\t/g, '    ')
-          segment.translation = segment.translation
+          segment.original = segment.original
+            .trim()
             .replace(/(\n|\r\n)/g, '\\n')
             .replace(/\t/g, '    ')
+            .replace(/¬/g, '')
+          segment.translation = segment.translation
+            .trim()
+            .replace(/(\n|\r\n)/g, '\\n')
+            .replace(/\t/g, '    ')
+            .replace(/¬/g, '')
         }
         const store = useStore()
         store.segments = fileSegments

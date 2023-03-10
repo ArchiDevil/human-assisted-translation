@@ -15,6 +15,7 @@ export default {
       const store = useStore()
       const segments = []
       for (let segment of store.segments) {
+        if (segment.original.trim() === '' && segment.translation.trim() === '') continue
         segments.push({
           original: segment.original.trim(),
           translation: segment.translation.trim()
