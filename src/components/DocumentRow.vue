@@ -24,15 +24,31 @@ export default {
       const idx = store.segments.findIndex(s => s.id === this.segment.id)
       store.segments[idx].translation = value
     }
+  },
+  computed: {
+    classObject() {
+      return {
+        balance: this.areUnbalanced
+      }
+    },
+    areUnbalanced() {
+      return this.segment.original.split('.').length !== this.segment.translation.split('.').length
+    }
   }
 }
 </script>
 
 <template>
-  <div class="flex flex-row">
+  <div :class="classObject" class="flex flex-row">
     <p class="mx-3 py-3">{{ segment.id }}</p>
     <DocumentSegment class="w-1/2 mx-2" :text="segment.original" @input="originalUpdate" />
     <DocumentSegment class="w-1/2 mx-2" :text="segment.translation" @input="translationUpdate" />
     <ActionButtons class="w-1/12" :segment="segment" />
   </div>
 </template>
+
+<style scoped>
+.balance {
+  @apply border-l-4 border-teal-600;
+}
+</style>

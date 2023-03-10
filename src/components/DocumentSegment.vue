@@ -25,15 +25,24 @@ export default {
     }
   },
   computed: {
-    hasIssues(): boolean {
+    classObject() {
+      return {
+        warning: this.hasNewlines,
+        error: this.isEmpty
+      }
+    },
+    hasNewlines() {
       return /\\n/g.test(this.text)
+    },
+    isEmpty() {
+      return this.text === ''
     }
   }
 }
 </script>
 
 <template>
-  <textarea :class="{'warning': hasIssues}" :value="text" @input="input" spellcheck="false" ref="input" />
+  <textarea :class="classObject" :value="text" @input="input" spellcheck="false" ref="input" />
 </template>
 
 <style scoped>
@@ -46,6 +55,10 @@ textarea:focus {
 }
 
 .warning {
-  @apply bg-amber-200;
+  @apply border-l-4 border-amber-400;
+}
+
+.error {
+  @apply border-l-4 border-red-400;
 }
 </style>
