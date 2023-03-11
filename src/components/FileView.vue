@@ -54,12 +54,16 @@ export default {
           segment.id = i++
           segment.original = segment.original
             .trim()
-            .replace(/(\n|\r\n)/g, '\\n')
+            .replace(/(\n|\r\n)/g, '\n')
+            .replace(/\n+/g, '\n')
+            .replace(/\n/g, '\\n')
             .replace(/\t/g, '    ')
             .replace(/¬/g, '')
           segment.translation = segment.translation
             .trim()
-            .replace(/(\n|\r\n)/g, '\\n')
+            .replace(/(\n|\r\n)/g, '\n')
+            .replace(/\n+/g, '\n')
+            .replace(/\n/g, '\\n')
             .replace(/\t/g, '    ')
             .replace(/¬/g, '')
         }
