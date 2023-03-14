@@ -1,64 +1,25 @@
 <script lang="ts">
-import { PropType } from 'vue'
-import { Segment } from '../interfaces'
 import { useStore } from '../stores/store'
 
 export default {
   props: {
-    segment: {
-      type: Object as PropType<Segment>,
+    segmentId: {
+      type: Number,
       required: true
     }
   },
   methods: {
     remove() {
-      this.segment.original = this.segment.original.replace(/(\\n)/g, ' ')
-      this.segment.translation = this.segment.translation.replace(/(\\n)/g, ' ')
+      const store = useStore()
+      store.removeNewlines(this.segmentId)
     },
     split() {
       const store = useStore()
-      const segments = store.segments.slice()
-      const index = segments.indexOf(this.segment)
-
-      // split the current segment into multiple by \n or \r\n
-      const original = this.segment.original.split(/\\n/g)
-      const translation = this.segment.translation.split(/\\n/g)
-
-      console.log(this.segment.translation)
-      console.log(translation)
-
-      // assemble the new segments array
-      const newSegments = segments.slice(0, index)
-      for (let i = 0; i < Math.max(original.length, translation.length); i++) {
-        newSegments.push({
-          id: 0,
-          original: i < original.length ? original[i] : '',
-          translation: i < translation.length ? translation[i] : ''
-        })
-      }
-      newSegments.push(...segments.slice(index + 1))
-
-      // recalculate the ids from the beginning
-      let id = 1
-      for (const segment of newSegments) {
-        segment.id = id++
-      }
-
-      // update the store
-      store.segments = newSegments
+      store.splitSegmentByNewline(this.segmentId)
     },
     deleteSegment() {
       const store = useStore()
-      const newSegments = store.segments.slice()
-      const index = newSegments.indexOf(this.segment)
-      newSegments.splice(index, 1)
-
-      // recalculate the ids from the beginning
-      let id = 1
-      for (const segment of newSegments) {
-        segment.id = id++
-      }
-      store.segments = newSegments
+      store.deleteSegment(this.segmentId)
     }
   }
 }

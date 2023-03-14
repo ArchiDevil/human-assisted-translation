@@ -8,12 +8,12 @@ import DocumentView from './components/DocumentView.vue'
 
 const routes = [
   { path: '/human-assisted-translation/', component: FileView },
-  { path: '/human-assisted-translation/document', component: DocumentView },
+  { path: '/human-assisted-translation/document', component: DocumentView }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 
 const app = createApp(App)

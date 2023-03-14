@@ -40,10 +40,10 @@ export default {
 
 <template>
   <div :class="classObject" class="flex flex-row">
-    <p class="mx-3 py-3">{{ segment.id }}</p>
+    <p class="mx-3 py-3 w-12">{{ segment.id }}</p>
     <DocumentSegment class="w-1/2 mx-2" :text="segment.original" @input="originalUpdate" />
     <DocumentSegment class="w-1/2 mx-2" :text="segment.translation" @input="translationUpdate" />
-    <ActionButtons class="w-1/12" :segment="segment" />
+    <ActionButtons :segment-id="segment.id" class="w-32" />
   </div>
 </template>
 

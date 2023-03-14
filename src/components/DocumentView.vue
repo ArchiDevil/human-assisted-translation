@@ -1,9 +1,10 @@
 <script lang="ts">
 import { useStore } from '../stores/store'
 import DocumentRow from './DocumentRow.vue'
+import IssuesPanel from './IssuesPanel.vue'
 
 export default {
-  components: { DocumentRow },
+  components: { DocumentRow, IssuesPanel },
   computed: {
     segments() {
       const store = useStore()
@@ -37,6 +38,7 @@ export default {
 <template>
   <DocumentRow class="drow" v-for="segment in segments" :key="segment.id" :segment="segment" />
   <button @click="download">Download the result</button>
+  <IssuesPanel />
 </template>
 
 <style scoped>
