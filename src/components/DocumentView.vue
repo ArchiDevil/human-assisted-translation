@@ -9,6 +9,10 @@ export default {
     segments() {
       const store = useStore()
       return store.segments
+    },
+    hasErrors() {
+      const store = useStore()
+      return store.hasErrors
     }
   },
   methods: {
@@ -37,17 +41,23 @@ export default {
 
 <template>
   <DocumentRow class="drow" v-for="segment in segments" :key="segment.id" :segment="segment" />
-  <button @click="download">Download the result</button>
-  <IssuesPanel />
+  <div class="flex flex-row">
+    <button :disabled="hasErrors" @click="download">Download the result</button>
+    <IssuesPanel class="my-3 mx-5" />
+  </div>
 </template>
 
 <style scoped>
 button {
-  @apply border-2 border-gray-800 p-8 rounded-md font-bold text-lg w-max;
+  @apply border-2 border-gray-800 p-8 rounded-md font-bold text-lg w-max my-3;
 }
 
 button:hover {
   @apply bg-gray-800 text-white;
+}
+
+button:disabled {
+  @apply bg-gray-300 text-gray-600;
 }
 
 .drow:nth-child(even) {

@@ -21,8 +21,14 @@ export default {
 
 <template>
   <div>
-    <p>Segments with newlines: {{ newlines }}</p>
-    <p>Unbalanced segments: {{ unbalanced }}</p>
-    <p>Empty segments: {{ empty }}</p>
+    <p class="decoration-amber-400">Segments with newlines: {{ newlines }}</p>
+    <p class="decoration-teal-600">Unbalanced segments: {{ unbalanced }}</p>
+    <p class="decoration-red-400">Empty segments: {{ empty }}</p>
   </div>
 </template>
+
+<style scoped>
+p {
+  @apply decoration-2 decoration-solid underline underline-offset-2;
+}
+</style>

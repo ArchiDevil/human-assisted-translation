@@ -23,8 +23,6 @@ export const useStore = defineStore('store', {
         return
       }
 
-      console.log(targetSegment)
-
       // split the current segment into multiple by \n
       const originals = targetSegment.original.split(/\\n/g)
       const translations = targetSegment.translation.split(/\\n/g)
@@ -73,6 +71,13 @@ export const useStore = defineStore('store', {
         const translationLines = s.translation.split('.')
         return originalLines.length !== translationLines.length
       }).length
+    },
+    hasErrors(): boolean {
+      return (
+        this.emptySegmentsCount > 0 ||
+        this.newlineSegmentsCount > 0 ||
+        this.unbalancedSegmentsCount > 0
+      )
     }
   }
 })
