@@ -20,6 +20,10 @@ export default {
     deleteSegment() {
       const store = useStore()
       store.deleteSegment(this.segmentId)
+    },
+    splitSents() {
+      const store = useStore()
+      store.splitSegmentBySentence(this.segmentId)
     }
   }
 }
@@ -30,6 +34,7 @@ export default {
     <button @click="remove">Remove \n</button>
     <button @click="split">Split by \n</button>
     <button @click="deleteSegment">Delete seg</button>
+    <button @click="splitSents">Split sents</button>
   </div>
 </template>
 
