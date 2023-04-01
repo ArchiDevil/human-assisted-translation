@@ -27,8 +27,8 @@ function assembleNewSegments(
   for (let i = 0; i < Math.max(originals.length, translations.length); i++) {
     newSegments.push({
       id: 0,
-      original: i < originals.length ? originals[i] : '',
-      translation: i < translations.length ? translations[i] : ''
+      original: i < originals.length ? originals[i].trim() : '',
+      translation: i < translations.length ? translations[i].trim() : ''
     })
   }
   newSegments.push(...segments.slice(segmentId))
@@ -85,8 +85,8 @@ export const useStore = defineStore('store', {
     removeNewlines(segmentId: number) {
       const targetSegment = findSegment(this.segments, segmentId)
 
-      targetSegment.original = targetSegment.original.replace(/(\\n)/g, ' ')
-      targetSegment.translation = targetSegment.translation.replace(/(\\n)/g, ' ')
+      targetSegment.original = targetSegment.original.replace(/(\\n)/g, ' ').trim()
+      targetSegment.translation = targetSegment.translation.replace(/(\\n)/g, ' ').trim()
     }
   },
   getters: {
@@ -105,11 +105,10 @@ export const useStore = defineStore('store', {
       }).length
     },
     hasErrors(): boolean {
-      return (
-        this.emptySegmentsCount > 0 ||
-        this.newlineSegmentsCount > 0 ||
-        this.unbalancedSegmentsCount > 0
-      )
+      return this.emptySegmentsCount > 0 || this.newlineSegmentsCount > 0
+    },
+    hasWarnings(): boolean {
+      return this.unbalancedSegmentsCount > 0
     }
   }
 })

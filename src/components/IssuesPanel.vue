@@ -22,8 +22,8 @@ export default {
 <template>
   <div>
     <p class="decoration-amber-400">Segments with newlines: {{ newlines }}</p>
-    <p class="decoration-teal-600">Unbalanced segments: {{ unbalanced }}</p>
     <p class="decoration-red-400">Empty segments: {{ empty }}</p>
+    <p class="decoration-teal-600">Unbalanced segments: {{ unbalanced }}</p>
   </div>
 </template>
 
